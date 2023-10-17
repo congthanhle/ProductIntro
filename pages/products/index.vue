@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-5">
     <h3 class="mb-5">Products</h3>
-    <div class="row d-flex justify-content-center">
-      <div v-for="product in products" class="col-md-auto mb-4 ">
+    <div class="row">
+      <div v-for="product in products" class="col-md-3 mb-4">
         <ProductCard :product="product" />
       </div>
     </div>
@@ -11,11 +11,15 @@
 
 <script setup lang="ts">
 import ProductCard from '~/components/Product/ProductCard.vue'
+import type { Product } from '~/store/Products/state'
 import store from '~/store/index'
 definePageMeta({
   layout: "default",
 })
-const {data: products} = await useFetch("/api/products")
+const {data} = await useFetch("/api/products");  
+    
+const products = data as unknown as Product[];  
+
 store.dispatch("fetchProducts", products);
 </script>
 
