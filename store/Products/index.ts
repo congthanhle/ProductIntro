@@ -6,11 +6,11 @@ import mutations from '~/store/Products/mutations'
 import actions from '~/store/Products/actions'
 import type { RootState } from '~/store/index'
 
-const itemsModule: Module<ProductsState, RootState> = {
+const productsModule: Module<ProductsState, RootState> = {
   state,
   getters,
   mutations,
   actions
 }
 
-export default itemsModule
+export default productsModule

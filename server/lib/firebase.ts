@@ -3,12 +3,12 @@ import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN ,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID 
+  authDomain: 'todo-list-33b6c.firebaseapp.com',
+  projectId: 'todo-list-33b6c',
+  storageBucket: 'todo-list-33b6c.appspot.com',
+  messagingSenderId: '703838550422',
+  appId: '1:703838550422:web:34ed7d1420780d2f9f85b7',
+  measurementId: 'G-QRRS6NGME1'
 }
 
 const app = initializeApp(firebaseConfig)
