@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   ssr: true,
   $production: {
     routeRules: {
-      "/": { prerender: true },
+      // "/": { prerender: true },
 
       "/products/*": {swr: 3600 },
     },
