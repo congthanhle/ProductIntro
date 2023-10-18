@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <h3 class="mb-5">Products</h3>
     <div class="row">
-      <div v-for="product in products" class="col-md-3 mb-4">
+      <div v-for="product in products" class="col col-xl-3 mb-4">
         <ProductCard :product="product" />
       </div>
     </div>

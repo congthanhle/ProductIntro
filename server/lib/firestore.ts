@@ -23,7 +23,7 @@ export const queryById = async (col: string, id: string) => {
   const colRef = collection(database, col);
   const docRef = doc(colRef, id);
   const docSnap = await getDoc(docRef);
-  return docSnap.data();
+  return {id, ... docSnap.data()};
 };
 
 export const add = async (col: string, document: Object) => {
