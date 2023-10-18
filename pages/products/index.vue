@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="mt-5 container">
     <h3 class="mb-5">Products</h3>
     <div class="row">
       <div v-for="product in products" class="col col-xl-3 mb-4">
