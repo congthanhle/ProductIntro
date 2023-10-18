@@ -21,6 +21,7 @@ const {data} = await useFetch("/api/products");
 const products = data as unknown as Product[];  
 
 store.dispatch("fetchProducts", products);
+
 </script>
 
 <style scoped></style>
