@@ -1,5 +1,11 @@
-import { queryByCollection } from "~/server/lib/firestore";
+import { queryByCollection, query } from "~/server/lib/firestore";
+import { Product } from "~/store/Products/state";
 
-const productsData = queryByCollection('products');
+let dataProducts: Product[] = [];
 
-export default defineEventHandler(() => (productsData));
+const unsubscribe = query("products", (docs: any) => {
+  dataProducts = docs;
+});
+
+// const productsData = queryByCollection('products');
+export default defineEventHandler(() => dataProducts);

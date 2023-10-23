@@ -3,7 +3,7 @@ import type { ProductsState } from '~/store/Products/state'
 import type { RootState } from '~/store/index'
 
 const getters: GetterTree<ProductsState, RootState> = {
-  products: (state: ProductsState) => state.products
+  PRODUCTS: (state: ProductsState) => state.products
 }
 
 export default getters;

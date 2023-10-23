@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="product" class="container">
     <div class="row mt-5 text-align-center ">
       <div class="col-lg-5 col-md-5 col-sm-6">
         <div class="white-box text-center"><img :src="product?.image" :alt="product?.name" class="img"></div>
@@ -21,18 +21,27 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { Product } from '~/store/Products/state'
 
 const { id } = useRoute().params;
+const { data } = useAsyncData('product', () => $fetch(`/api/products/${id}`));
+const product = ref<Product | null>(null);
 
-const { data } = await useAsyncData('product', () => $fetch(`/api/products/${id}`));
+watch(data, (newData) => {
+  if (newData) product.value = newData as unknown as Product;
+});
 
-const product = data as unknown as Product;
-
+onBeforeRouteUpdate(async (to) => {
+  product.value = null;
+  const newId = to.params.id;
+  const newData = await $fetch(`/api/products/${newId}`);
+  product.value = newData as unknown as Product;
+});    
 </script>
 
 <style scoped>
-.img{
+.img {
   width: 70%;
 }
 </style>

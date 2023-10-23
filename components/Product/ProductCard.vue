@@ -1,15 +1,19 @@
-<template>
-  <div class="card text-center" >
-    <div class="d-flex align-items-center mx-auto mt-3 img-container">
-      <img :src="product?.image" class="card-img-top img-fluid media"  :alt="product?.name">
-    </div>
-    <div class="card-body">
-      <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product?.name }}
-      </h5>
-      <nuxt-link class="btn btn-outline-info mt-2" :to="`/products/${product?.id}`">View Details</nuxt-link>
-    </div>
-  </div>
-</template>
+<template>  
+  <div class="card text-center">  
+    <div class="d-flex align-items-center mx-auto mt-3 img-container">  
+      <img :src="product?.image" class="card-img-top img-fluid media"  :alt="product?.name">  
+    </div>  
+    <div class="card-body">  
+      <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product?.name }}</h5>  
+      <div class="btn-group mt-2" role="group" aria-label="Basic mixed styles example">  
+        <nuxt-link class="btn btn-outline-success me-2" :to="`/products/edit/${product?.id}`">Edit</nuxt-link>  
+        <nuxt-link class="btn btn-outline-info me-2" :to="`/products/${product?.id}`">View Details</nuxt-link>  
+        <button type="button" class="btn btn-outline-danger">Del</button>  
+      </div>  
+    </div>  
+  </div>  
+</template>  
+
 
 <script setup lang="ts">
 import type { Product } from '~/store/Products/state'

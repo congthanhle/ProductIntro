@@ -16,10 +16,12 @@ import store from '~/store/index'
 definePageMeta({
   layout: "default",
 })
+
 const {data} = await useFetch("/api/products");  
     
 const products = data as unknown as Product[];  
-store.dispatch("fetchProducts", products);
+
+await store.dispatch("FETCH_PRODUCTS");
 
 </script>
 
