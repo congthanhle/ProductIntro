@@ -12,15 +12,16 @@
 <script setup lang="ts">
 import ProductCard from '~/components/Product/ProductCard.vue'
 import type { Product } from '~/store/Products/state'
-
+import store from '~/store/index'
 definePageMeta({
   layout: "default",
 })
 
-const { data } =  useFetch("/api/products")
+const { data } = await useFetch("/api/products")
 
 const products = data as unknown as Product[];
 
+await store.dispatch("FETCH_PRODUCTS");
 </script>
 
 <style scoped></style>
