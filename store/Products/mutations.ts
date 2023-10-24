@@ -5,9 +5,5 @@ const mutations: MutationTree<ProductsState> = {
   SET_PRODUCTS: (state: ProductsState, items: Product[]) => {
     state.products = items;
   },
-  ADD_PRODUCT: (state: ProductsState, item: Product) => {
-    // state.products.push(item);
-
-  },
 };
 export default mutations;

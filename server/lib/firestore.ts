@@ -4,6 +4,8 @@ import {
   addDoc,
   getDoc,
   doc,
+  updateDoc,
+  deleteDoc,
   onSnapshot
 } from "firebase/firestore";
 import { database } from "~/server/lib/firebase";
@@ -42,8 +44,20 @@ export const queryById = async (col: string, id: string) => {
   return {id, ... docSnap.data()};
 };
 
-export const add = async (col: string, document: Object) => {
+export const addItem = async (col: string, document: Object) => {
   const colRef = collection(database, col);
   const docRef = await addDoc(colRef, document);
   return docRef;
 };
+
+export const editItem = async (col: string, id: string, document: any) => {
+  const colRef = collection(database, col);
+  const docRef = await updateDoc(doc(colRef, id), document);
+  return docRef;
+};
+  
+export const deleteItem = async (col: string, id: string) => {
+  const colRef = collection(database, col); 
+  const docRef = await deleteDoc(doc(colRef, id));
+  return docRef;
+}

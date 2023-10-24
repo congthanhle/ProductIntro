@@ -32,6 +32,7 @@ definePageMeta({
   layout: "default",
 })
 
+const router = useRouter()
 const product = ref({
   name: "",
   description: "",
@@ -40,7 +41,10 @@ const product = ref({
 })
 
 const submit = async () => {
-  await store.dispatch("ADD_PRODUCT", product.value);
+  const add = await store.dispatch("ADD_PRODUCT", product.value);
+  if (add) {
+    router.push({ path: "/products" })
+  } 
 }  
 </script>
 

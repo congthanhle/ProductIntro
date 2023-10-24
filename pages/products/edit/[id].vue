@@ -2,7 +2,7 @@
   <div class="container pt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submitEditForm">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" v-model="product.name">
@@ -19,29 +19,51 @@
             <label for="image" class="form-label">Image</label>
             <input type="text" id="image" class="form-control" placeholder="Enter image URL" v-model="product.image">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="row d-flex justify-content-around">
+            <button type="submit" class="btn btn-primary col-4">Submit</button>
+            <nuxt-link class="btn btn-danger col-4" to="/products">Cancel</nuxt-link>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </template>
 
+  
 <script setup lang="ts">
 import store from '~/store'
+import { Product } from '~/store/Products/state';
+
 definePageMeta({
   layout: "default",
 })
 const { id } = useRoute().params;
+const { data } = useAsyncData('product', () => $fetch(`/api/products/${id}`));
+const productData = data as unknown as Product;
+const router = useRouter();
+
 const product = ref({
   name: "",
   description: "",
-  price: "",
-  image: ""
-})
+  price: 0,
+  image: "",
+});
 
-const submit = async () => {
-  await store.dispatch("ADD_PRODUCT", product.value);
-}  
-</script>
+
+watch(productData, (newValue, oldValue) => {
+  if (newValue) {
+    product.value.name = newValue.name || '';
+    product.value.description = newValue.description || '';
+    product.value.price = newValue.price || 0;
+    product.value.image = newValue.image || '';
+  }
+}, { immediate: true });
+
+const submitEditForm = async () => {
+  await store.dispatch("EDIT_PRODUCT", {id, ...product.value});
+  router.push({ path: "/products" })
+}    
+</script>  
+
 
 <style scoped></style>

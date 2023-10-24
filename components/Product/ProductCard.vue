@@ -8,7 +8,7 @@
       <div class="btn-group mt-2" role="group" aria-label="Basic mixed styles example">  
         <nuxt-link class="btn btn-outline-success me-2" :to="`/products/edit/${product?.id}`">Edit</nuxt-link>  
         <nuxt-link class="btn btn-outline-info me-2" :to="`/products/${product?.id}`">View Details</nuxt-link>  
-        <button type="button" class="btn btn-outline-danger">Del</button>  
+        <button type="button" class="btn btn-outline-danger" @click="handleDeleteProduct">Del</button>  
       </div>  
     </div>  
   </div>  
@@ -17,9 +17,16 @@
 
 <script setup lang="ts">
 import type { Product } from '~/store/Products/state'
-defineProps<{
+import store from '~/store';
+const props = defineProps<{
   product: Product,
 }>()
+
+const handleDeleteProduct = async () => {
+    await store.dispatch("DELETE_PRODUCT", props.product.id)
+    window.location.reload();
+}
+
 </script>
 
 <style scoped>
