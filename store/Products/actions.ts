@@ -3,7 +3,7 @@ import type { Product, ProductsState } from "~/store/Products/state";
 import type { RootState } from "~/store/index";
 
 import {
-  query,
+  queryByCollection,
   addItem,
   editItem,
   deleteItem,
@@ -12,10 +12,7 @@ import store from "~/store";
 
 const actions: ActionTree<ProductsState, RootState> = {
   FETCH_PRODUCTS: ({ commit }: { commit: Commit }) => {
-    let products: Product[] = [];
-    const unsubscribe = query("products", (docs: any) => {
-      products = docs;
-    });
+    const products = queryByCollection('products')
     commit("SET_PRODUCTS", products);
   },
   ADD_PRODUCT: ({ commit }: { commit: Commit }, item) => {
