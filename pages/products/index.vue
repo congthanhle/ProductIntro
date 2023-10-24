@@ -17,7 +17,7 @@ definePageMeta({
   layout: "default",
 })
 
-const { data } = useFetch("/api/products"); 
+const { data } = useAsyncData('products', () => $fetch(`/api/products`));
 
 const products = data as unknown as Product[];
 
