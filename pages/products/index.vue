@@ -17,11 +17,11 @@ definePageMeta({
   layout: "default",
 })
 
-const { data } = useFetch("/api/products")
+const { data } = await useFetch("/api/products")
 
 const products = data as unknown as Product[];
 
-await store.dispatch("FETCH_PRODUCTS");
+// await store.dispatch("FETCH_PRODUCTS");
 </script>
 
 <style scoped></style>
