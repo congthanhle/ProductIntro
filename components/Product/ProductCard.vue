@@ -24,7 +24,7 @@ const props = defineProps<{
 
 const handleDeleteProduct = async () => {
     await store.dispatch("DELETE_PRODUCT", props.product.id)
-    window.location.reload();
+
 }
 
 </script>
