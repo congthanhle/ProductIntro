@@ -38,10 +38,10 @@ watch(data, (newData, oldData) => {
   }
 });
 
-onBeforeRouteUpdate(async (to) => {
+onBeforeRouteUpdate((to) => {
   product.value = null;
   const newId = to.params.id;
-  const newData = await $fetch(`/api/products/${newId}`);
+  const newData = $fetch(`/api/products/${newId}`);
   product.value = newData as unknown as Product;
 });    
 </script>
