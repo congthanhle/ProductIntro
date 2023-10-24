@@ -60,8 +60,10 @@ watch(productData, (newValue, oldValue) => {
 }, { immediate: true });
 
 const submitEditForm = async () => {
-  await store.dispatch("EDIT_PRODUCT", {id, ...product.value});
-  router.push({ path: "/products" })
+  const update = await store.dispatch("EDIT_PRODUCT", {id, ...product.value});
+  if (update) {
+    router.push({ path: "/products" })
+  } 
 }    
 </script>  
 

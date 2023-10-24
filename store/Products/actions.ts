@@ -24,12 +24,14 @@ const actions: ActionTree<ProductsState, RootState> = {
     return addState;
   },
   EDIT_PRODUCT: ({ commit }: { commit: Commit }, item) => {
-    editItem("products", item.id, item);
+    const editState = editItem("products", item.id, item);
     store.dispatch("FETCH_PRODUCTS");
+    return editState;
   },
   DELETE_PRODUCT: ({ commit }: { commit: Commit }, id) => {
-    deleteItem("products", id);
+    const deleteState = deleteItem("products", id);
     store.dispatch("FETCH_PRODUCTS");
+    return deleteState;
   },
 };
 

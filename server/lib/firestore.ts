@@ -53,11 +53,11 @@ export const addItem = async (col: string, document: Object) => {
 export const editItem = async (col: string, id: string, document: any) => {
   const colRef = collection(database, col);
   const docRef = await updateDoc(doc(colRef, id), document);
-  return docRef;
+  return {state: "success"};
 };
   
 export const deleteItem = async (col: string, id: string) => {
   const colRef = collection(database, col); 
   const docRef = await deleteDoc(doc(colRef, id));
-  return docRef;
+  return {state: "success"};
 }

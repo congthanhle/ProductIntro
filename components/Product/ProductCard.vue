@@ -23,8 +23,8 @@ const props = defineProps<{
 }>()
 
 const handleDeleteProduct = async () => {
-    await store.dispatch("DELETE_PRODUCT", props.product.id)
-
+    const del = await store.dispatch("DELETE_PRODUCT", props.product.id)
+    if(del) window.location.reload();
 }
 
 </script>

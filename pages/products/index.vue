@@ -17,7 +17,7 @@ definePageMeta({
   layout: "default",
 })
 
-const { data } = await useFetch("/api/products");
+const { data } = await useFetch("/api/products"); 
 
 const products = data as unknown as Product[];
 

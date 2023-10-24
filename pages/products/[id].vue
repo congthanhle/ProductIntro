@@ -25,19 +25,10 @@ import { ref } from 'vue'
 import type { Product } from '~/store/Products/state'
 
 const { id } = useRoute().params;
+
 const { data } = useAsyncData('product', () => $fetch(`/api/products/${id}`));
-const product = ref<Product | null>(null);
+const product = data as unknown as Product
 
-watch(data, (newData) => {
-  if (newData) product.value = newData as unknown as Product;
-});
-
-onBeforeRouteUpdate(async (to) => {
-  product.value = null;
-  const newId = to.params.id;
-  const newData = await $fetch(`/api/products/${newId}`);
-  product.value = newData as unknown as Product;
-});    
 </script>
 
 <style scoped>
