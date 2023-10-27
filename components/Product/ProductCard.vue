@@ -1,7 +1,7 @@
 <template>  
   <div class="card text-center">  
     <div class="d-flex align-items-center mx-auto mt-3 img-container">  
-      <img :src="product?.image" class="card-img-top img-fluid media"  :alt="product?.name">  
+      <img :src="product?.image" class="card-img-top img-fluid media" :alt="product?.name">  
     </div>  
     <div class="card-body">  
       <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product?.name }}</h5>  
@@ -16,15 +16,14 @@
 
 
 <script setup lang="ts">
-import type { Product } from '~/store/Products/state'
-import store from '~/store';
+import type { Product } from '~/store/Products/state';
+const emits =  defineEmits(['handleItemDelete'])
 const props = defineProps<{
   product: Product,
 }>()
 
-const handleDeleteProduct = async () => {
-    const del = await store.dispatch("DELETE_PRODUCT", props.product.id)
-    if(del) window.location.reload();
+const handleDeleteProduct =  () => {
+    emits('handleItemDelete', props.product.id)
 }
 
 </script>
