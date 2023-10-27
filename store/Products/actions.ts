@@ -1,5 +1,5 @@
 import type { ActionTree, Commit } from "vuex/types/index.js";
-import type { Product, ProductsState } from "~/store/Products/state";
+import type { ProductsState } from "~/store/Products/state";
 import type { RootState } from "~/store/index";
 
 import {
@@ -8,7 +8,7 @@ import {
   editItem,
   deleteItem,
 } from "~/server/lib/firestore";
-import store from "~/store";
+
 
 const actions: ActionTree<ProductsState, RootState> = {
   FETCH_PRODUCTS: ({ commit }: { commit: Commit }) => {

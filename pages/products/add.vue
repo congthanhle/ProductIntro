@@ -27,12 +27,12 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
 import store from '~/store'
 definePageMeta({
   layout: "default",
 })
 
-const router = useRouter()
 const product = ref({
   name: "",
   description: "",
