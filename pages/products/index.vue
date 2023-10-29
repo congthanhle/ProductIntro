@@ -25,8 +25,6 @@ const handleDeleteItem = (productId: string) => {
     productsData.value = productsData.value.filter((item: any) => item.id !== productId)  
     store.dispatch('DELETE_PRODUCT', productId)
   }  
-  console.log(productsData.value)
-  // console.log(productId)
 }
 
 </script>

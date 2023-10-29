@@ -4,9 +4,9 @@ export default defineNuxtConfig({
     routeRules: {
       "/": { prerender: true },
 
-      "/products/": {swr: 3600 },
+      "/products/": { swr: 3600 },
     },
   },
   css: ["bootstrap/dist/css/bootstrap.css"],
-  modules: ["@nuxt/devtools"],
+  modules: ["@nuxt/devtools", "@vee-validate/nuxt",'@nuxtjs/tailwindcss'],
 });

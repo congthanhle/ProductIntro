@@ -1,51 +1,69 @@
 <template>
-  <div class="container pt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <form @submit.prevent="submit">
-          <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" v-model="product.name">
+  <div class="container pt-5 mx-auto">
+    <div class="flex justify-center">
+      <div class="w-1/2">
+        <h4>ADD PRODUCT</h4>
+        <VeeForm :validation-schema="schema" @submit="handleAddSubmit" class="mt-10">
+          <div class="mb-6">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+            <Field name="name" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <ErrorMessage name="name" class="text-red-500 text-sm" />
           </div>
-          <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" min="0" v-model="product.price">
+          <div class="mb-6">
+            <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
+            <Field name="price" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <ErrorMessage name="price" class="text-red-500 text-sm" />
           </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" v-model="product.description"></textarea>
+          <div class="mb-6">
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+            <Field as="textarea" name="description" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <ErrorMessage name="description" class="text-red-500 text-sm" />
           </div>
-          <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="text" id="image" class="form-control" placeholder="Enter image URL" v-model="product.image">
+          <div class="mb-6">
+            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image</label>
+            <Field name="image" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <ErrorMessage name="image" class="text-red-500 text-sm" />
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+          <div class="mt-8">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full disabled:opacity-50">
+              Submit
+            </button>
+          </div>
+        </VeeForm>
       </div>
     </div>
   </div>
 </template>
 
+
 <script setup lang="ts">
-const router = useRouter()
+const router = useRouter();
+import * as yup from 'yup';
+import { Form as VeeForm } from 'vee-validate';
 import store from '~/store'
 definePageMeta({
   layout: "default",
 })
+const loadingSubmitBtn = ref(false);
 
-const product = ref({
-  name: "",
-  description: "",
-  price: "",
-  image: ""
-})
-
-const submit = async () => {
-  const add = await store.dispatch("ADD_PRODUCT", product.value);
-  if (add) {
-    router.push({ path: "/products" })
-  } 
-}  
+const handleAddSubmit = async function (values: any) {
+  if (values) {
+    const state = await store.dispatch("ADD_PRODUCT", values);
+    loadingSubmitBtn.value= true
+    if (state) {
+      router.push({ path: "/" })
+    }
+    else {
+      setTimeout(() => { loadingSubmitBtn.value = false }, 1000)
+    }
+  }
+}
+const schema = yup.object({
+  name: yup.string().required('Name is required'),
+  description: yup.string().required('Description is required'),
+  price: yup.number().required('Price is required').min(0, "Price is more than 0"),
+  image: yup.string().required('Image is required'),
+});
 </script>
 
 <style scoped></style>

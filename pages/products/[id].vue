@@ -51,3 +51,4 @@ onBeforeRouteUpdate((to) => {
   width: 70%;
 }
 </style>
+
