@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import ProductCard from '~/components/Product/ProductCard.vue'
-import type {Product} from '~/store/Products/state'
 import store from '~/store'
 definePageMeta({
   layout: "default",
@@ -21,10 +20,10 @@ const { data: products } = await useLazyFetch('/api/products');
 const productsData = ref(products);
 
 const handleDeleteItem = (productId: string) => {
-  if (productsData.value) {  
-    productsData.value = productsData.value.filter((item: any) => item.id !== productId)  
+  if (productsData.value) {
+    productsData.value = productsData.value.filter((item: any) => item.id !== productId)
     store.dispatch('DELETE_PRODUCT', productId)
-  }  
+  }
 }
 
 </script>

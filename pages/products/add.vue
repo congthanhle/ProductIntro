@@ -6,26 +6,31 @@
         <VeeForm :validation-schema="schema" @submit="handleAddSubmit" class="mt-10">
           <div class="mb-6">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
-            <Field name="name" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <Field name="name"
+              class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
             <ErrorMessage name="name" class="text-red-500 text-sm" />
           </div>
           <div class="mb-6">
             <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
-            <Field name="price" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <Field name="price"
+              class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
             <ErrorMessage name="price" class="text-red-500 text-sm" />
           </div>
           <div class="mb-6">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-            <Field as="textarea" name="description" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <Field as="textarea" name="description"
+              class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
             <ErrorMessage name="description" class="text-red-500 text-sm" />
           </div>
           <div class="mb-6">
             <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image</label>
-            <Field name="image" class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
+            <Field name="image"
+              class="w-full px-3 py-2 border rounded-md shadow-md focus:outline-none focus:ring focus:border-blue-300" />
             <ErrorMessage name="image" class="text-red-500 text-sm" />
           </div>
           <div class="mt-8">
-            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full disabled:opacity-50">
+            <button type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full disabled:opacity-50">
               Submit
             </button>
           </div>
@@ -49,7 +54,7 @@ const loadingSubmitBtn = ref(false);
 const handleAddSubmit = async function (values: any) {
   if (values) {
     const state = await store.dispatch("ADD_PRODUCT", values);
-    loadingSubmitBtn.value= true
+    loadingSubmitBtn.value = true
     if (state) {
       router.push({ path: "/" })
     }
