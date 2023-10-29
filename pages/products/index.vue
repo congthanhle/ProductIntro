@@ -16,7 +16,7 @@ definePageMeta({
   layout: "default",
 })
 
-const { data: products } = await useLazyFetch('/api/products');
+const { data: products } = await useFetch('/api/products');
 const productsData = ref(products);
 
 const handleDeleteItem = (productId: string) => {
