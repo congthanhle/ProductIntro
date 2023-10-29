@@ -1,3 +1,3 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  return navigateTo("/products");
+  return navigateTo("/products/add");
 });
